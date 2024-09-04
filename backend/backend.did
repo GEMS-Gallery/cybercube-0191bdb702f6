@@ -1,0 +1,22 @@
+type Time = int;
+type Result = 
+ variant {
+   err: text;
+   ok: nat;
+ };
+type FileInfo = 
+ record {
+   createdAt: Time;
+   id: nat;
+   name: text;
+   size: nat;
+   updatedAt: Time;
+ };
+service : {
+  createFolder: (text, opt nat) -> (Result);
+  downloadFile: (nat) -> (opt blob) query;
+  generateShareLink: (nat) -> (text);
+  getSharedFile: (text) -> (opt FileInfo) query;
+  listFiles: (opt nat) -> (vec FileInfo) query;
+  uploadFile: (text, blob, opt nat) -> (Result);
+}
